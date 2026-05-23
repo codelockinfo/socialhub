@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { userService } from '../services/api';
-import './Explore.css';
 
 const RECOMMENDED_USERS = [
   {
@@ -75,11 +74,10 @@ function Explore() {
       prevCreators.map(creator => {
         if (creator.id === id) {
           const isFollowingNow = !creator.isFollowing;
-          // Dynamically adjust following count in local storage mock user
           const mockUser = JSON.parse(localStorage.getItem('socialhub_mock_user'));
           if (mockUser) {
-            mockUser.followingCount = isFollowingNow 
-              ? mockUser.followingCount + 1 
+            mockUser.followingCount = isFollowingNow
+              ? mockUser.followingCount + 1
               : mockUser.followingCount - 1;
             localStorage.setItem('socialhub_mock_user', JSON.stringify(mockUser));
           }
@@ -100,10 +98,9 @@ function Explore() {
   );
 
   return (
-    <div className="explore-container">
-      {/* Search Input Box */}
-      <div className="explore-search-bar glass-panel">
-        <svg className="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="flex w-full flex-col gap-6">
+      <div className="glass-panel relative flex h-[52px] w-full items-center rounded-md border border-border bg-bg-surface px-4 shadow-sm">
+        <svg className="pointer-events-none absolute left-4 h-[18px] w-[18px] stroke-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
         <input
@@ -111,18 +108,21 @@ function Explore() {
           placeholder="Search topics, creators, or keywords..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="explore-search-input"
+          className="w-full border-none bg-transparent py-3 pl-8 text-[0.95rem] text-text-primary outline-none"
         />
       </div>
 
-      <div className="explore-grid">
-        {/* Left main discovery zone */}
-        <section className="discover-section">
-          <nav className="explore-tabs">
+      <div className="flex gap-8">
+        <section className="flex max-w-[680px] flex-1 flex-col gap-6 lg:max-w-full">
+          <nav className="flex gap-2 overflow-x-auto border-b border-border pb-3">
             {['trending', 'technology', 'art', 'photography'].map(tab => (
               <button
                 key={tab}
-                className={`tab-btn ${activeTab === tab ? 'active' : ''}`}
+                className={`shrink-0 rounded-sm px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
+                  activeTab === tab
+                    ? 'bg-indigo-500/10 text-primary'
+                    : 'text-text-secondary hover:bg-bg-surface-hover hover:text-text-primary'
+                }`}
                 onClick={() => setActiveTab(tab)}
               >
                 {tab}
@@ -130,54 +130,74 @@ function Explore() {
             ))}
           </nav>
 
-          {/* Cards feed depending on tab */}
-          <div className="explore-cards-grid">
+          <div className="grid grid-cols-2 gap-4 max-[580px]:grid-cols-1">
             {filteredExplorePosts.map(post => (
-              <div key={post.id} className="explore-card glass-panel animate-fade-in-up">
-                <div className="explore-card-image-wrap">
-                  <img src={post.imageUrl} alt={post.title} className="explore-card-img" />
-                  <span className="explore-card-tag">{post.category}</span>
+              <div
+                key={post.id}
+                className="glass-panel animate-fade-in-up flex cursor-pointer flex-col overflow-hidden rounded-md border border-border bg-bg-surface transition-all hover:-translate-y-0.5 hover:border-border-hover hover:shadow-xl"
+              >
+                <div className="group relative h-40 overflow-hidden">
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="absolute left-3 top-3 rounded-sm bg-gradient-to-br from-indigo-500 to-indigo-700 px-2 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-white">
+                    {post.category}
+                  </span>
                 </div>
-                <div className="explore-card-content">
-                  <h3 className="explore-card-title">{post.title}</h3>
-                  <span className="explore-card-stats">{post.readsCount}</span>
+                <div className="flex flex-col gap-2 p-4 text-left">
+                  <h3 className="text-[0.95rem] font-semibold leading-snug text-text-primary">{post.title}</h3>
+                  <span className="text-xs text-text-muted">{post.readsCount}</span>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Trending Topics (shown on all tabs for easy click access) */}
-          <div className="explore-trends-box glass-panel">
-            <h3 className="box-title">Trending Hashtags</h3>
-            <div className="hashtags-grid">
+          <div className="glass-panel rounded-lg border border-border bg-bg-surface p-6 text-left">
+            <h3 className="mb-5 border-b border-border pb-2 text-lg font-bold text-text-primary">Trending Hashtags</h3>
+            <div className="grid grid-cols-2 gap-4 max-[580px]:grid-cols-1">
               {searchedTrends.map(trend => (
-                <div key={trend.tag} className="hashtag-card">
-                  <span className="hashtag-name">#{trend.tag}</span>
-                  <span className="hashtag-count">{trend.postsCount} posts</span>
+                <div
+                  key={trend.tag}
+                  className="flex cursor-pointer flex-col gap-0.5 rounded-md border border-border bg-bg-main px-4 py-3.5 transition-all hover:-translate-y-px hover:border-primary hover:bg-bg-surface-hover"
+                >
+                  <span className="text-sm font-semibold text-text-primary">#{trend.tag}</span>
+                  <span className="text-xs text-text-muted">{trend.postsCount} posts</span>
                 </div>
               ))}
               {searchedTrends.length === 0 && (
-                <p className="no-results">No hashtags match your search.</p>
+                <p className="col-span-2 text-sm text-text-muted max-[580px]:col-span-1">No hashtags match your search.</p>
               )}
             </div>
           </div>
         </section>
 
-        {/* Right recommended creators section */}
-        <aside className="creators-sidebar">
-          <div className="widget-card creators-card glass-panel">
-            <h3 className="widget-title">Who to Follow</h3>
-            <div className="creators-list">
+        <aside className="hidden w-80 lg:block">
+          <div className="glass-panel rounded-lg border border-border bg-bg-surface p-6 text-left">
+            <h3 className="mb-5 border-b border-border pb-2 text-lg font-bold text-text-primary">Who to Follow</h3>
+            <div className="flex flex-col gap-5">
               {creators.map(creator => (
-                <div key={creator.id} className="creator-item">
-                  <img src={creator.avatar} alt={creator.fullName} className="creator-avatar" />
-                  <div className="creator-meta">
-                    <span className="creator-name">{creator.fullName}</span>
-                    <span className="creator-handle">@{creator.username}</span>
-                    <p className="creator-bio">{creator.bio}</p>
+                <div
+                  key={creator.id}
+                  className="grid grid-cols-[40px_1fr_auto] items-start gap-3 border-b border-border pb-4 last:border-0 last:pb-0"
+                >
+                  <img
+                    src={creator.avatar}
+                    alt={creator.fullName}
+                    className="h-10 w-10 rounded-full border-[1.5px] border-border object-cover"
+                  />
+                  <div className="min-w-0 overflow-hidden">
+                    <span className="block text-sm font-semibold text-text-primary">{creator.fullName}</span>
+                    <span className="mb-1 block text-xs text-text-muted">@{creator.username}</span>
+                    <p className="line-clamp-2 text-xs leading-snug text-text-secondary">{creator.bio}</p>
                   </div>
                   <button
-                    className={`follow-btn ${creator.isFollowing ? 'following' : ''}`}
+                    className={`shrink-0 rounded-full px-3.5 py-1 text-xs font-semibold transition-all hover:scale-[1.02] ${
+                      creator.isFollowing
+                        ? 'border border-border bg-transparent text-text-secondary hover:border-accent hover:bg-pink-500/5 hover:text-accent'
+                        : 'border-transparent bg-text-primary text-bg-main hover:opacity-90'
+                    }`}
                     onClick={() => handleFollowToggle(creator.id)}
                   >
                     {creator.isFollowing ? 'Following' : 'Follow'}
