@@ -1,0 +1,43 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.layout-body {
+  flex: 1;
+  margin-left: 280px; /* Offset for sidebar width */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: var(--transition-normal);
+  background-color: var(--bg-main);
+}
+
+.layout-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) {
+  .layout-body {
+    margin-left: 80px; /* Mini sidebar width */
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .layout-body {
+    margin-left: 0;
+    margin-top: 60px; /* Navbar height */
+    padding-bottom: 64px; /* Space for bottom nav bar */
+  }
+  .layout-main {
+    padding: 1rem;
+  }
+}
