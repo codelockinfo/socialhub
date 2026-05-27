@@ -19,7 +19,7 @@ function Layout({ children }) {
       case '/profile':
         return 'My Profile';
       case '/publisher':
-        return 'Content Studio';
+        return 'Publish';
       default:
         return 'SocialHub';
     }
@@ -47,7 +47,11 @@ function Layout({ children }) {
   return (
     <div className="app-mesh-bg flex min-h-screen w-full">
       <Sidebar />
-      <div className="flex min-h-screen flex-1 flex-col transition-all md:ml-[88px] lg:ml-[260px] max-md:mb-[72px] max-md:ml-0 max-md:mt-[64px]">
+      <div
+        className={`flex min-h-screen flex-1 flex-col transition-all md:ml-[88px] max-md:mb-[72px] max-md:ml-0 max-md:mt-[64px] ${
+          isPublisherPage ? 'lg:ml-[280px]' : 'lg:ml-[260px]'
+        }`}
+      >
         <Navbar title={getPageTitle(location.pathname)} subtitle={getPageSubtitle(location.pathname)} />
         <main
           className={`mx-auto w-full flex-1 animate-fade-in px-6 py-6 max-md:px-4 max-md:py-4 ${

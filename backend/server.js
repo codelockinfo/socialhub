@@ -4,8 +4,11 @@ import dotenv from 'dotenv';
 import postsRouter from './routes/posts.js';
 import usersRouter from './routes/users.js';
 import schedulerRouter from './routes/scheduler.js';
+import authRoutes from './routes/authRoutes.js';
+import publishRoutes from './routes/publishRoutes.js';
 import pool from './config/db.js';
 import { setupDb } from './config/setupDb.js';
+import connectDB from './config/mongoDb.js'; // MongoDB connection
 
 dotenv.config();
 
@@ -26,6 +29,10 @@ app.use(express.json());
 app.use('/api/posts', postsRouter);
 app.use('/api', usersRouter); // Mounts /me, /me (PUT), and /trends
 app.use('/api/scheduler', schedulerRouter);
+
+// New MongoDB / OAuth Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/publish', publishRoutes);
 
 // Root Health Check Endpoint
 app.get('/', (req, res) => {
@@ -71,8 +78,15 @@ setInterval(async () => {
 
 // Auto-initialize database tables before server starts
 try {
-  console.log('🔄 Checking and initializing database tables...');
+  console.log('🔄 Checking and initializing MySQL database tables...');
   await setupDb();
+  
+  // Connect to MongoDB
+  if (process.env.MONGO_URI) {
+    await connectDB();
+  } else {
+    console.warn('⚠️ MONGO_URI not found in .env. Skipping MongoDB connection.');
+  }
 } catch (error) {
   console.error('❌ Failed to auto-setup database on start:', error);
 }

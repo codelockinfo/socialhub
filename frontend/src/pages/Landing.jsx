@@ -56,23 +56,23 @@ function Landing() {
           <span className="bg-gradient-to-br from-[#ffd43b] to-[#fab005] bg-clip-text text-2xl text-transparent drop-shadow-[0_0_8px_rgba(250,176,5,0.5)]">
             ⚡
           </span>
-          <span className="text-[1.35rem] font-[850] tracking-tight text-white">SocialHub</span>
+          <span className="text-[1.35rem] font-[850] tracking-tight text-text-primary">SocialHub</span>
         </div>
         <div className="flex gap-7">
-          <a href="#features" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-white">
+          <a href="#features" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-text-primary">
             Features
           </a>
-          <a href="#demo" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-white">
+          <a href="#demo" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-text-primary">
             Interactive Demo
           </a>
-          <a href="#pricing" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-white">
+          <a href="#pricing" className="text-sm font-semibold text-[#adb5bd] no-underline transition-colors hover:text-text-primary">
             Pricing
           </a>
         </div>
         <div className="flex items-center gap-4">
           <button
             type="button"
-            className="cursor-pointer border-none bg-transparent text-sm font-semibold text-[#adb5bd] transition-colors hover:text-white"
+            className="cursor-pointer border-none bg-transparent text-sm font-semibold text-[#adb5bd] transition-colors hover:text-text-primary"
             onClick={() => handleOpenAuth('login')}
           >
             Login
@@ -109,7 +109,7 @@ function Landing() {
             </button>
             <button
               type="button"
-              className="cursor-pointer rounded-[25px] border border-white/[0.08] bg-white/[0.04] px-7 py-[13px] text-[1.05rem] font-bold text-[#dee2e6] transition-all hover:-translate-y-px hover:bg-white/[0.08] hover:text-white"
+              className="cursor-pointer rounded-[25px] border border-white/[0.08] bg-white/[0.04] px-7 py-[13px] text-[1.05rem] font-bold text-[#dee2e6] transition-all hover:-translate-y-px hover:bg-white/[0.08] hover:text-text-primary"
               onClick={() => navigate('/explore')}
             >
               Explore Trends
@@ -147,7 +147,7 @@ function Landing() {
       {/* 3. Interactive Demo Section */}
       <section id="demo" className="mx-auto my-20 max-w-[1200px] px-5">
         <div className="mb-10 text-center">
-          <h2 className="mb-2.5 text-[2.2rem] font-black tracking-tight text-white">Interactive Simulator</h2>
+          <h2 className="mb-2.5 text-[2.2rem] font-black tracking-tight text-text-primary">Interactive Simulator</h2>
           <p className="mx-auto max-w-[580px] text-[1.05rem] text-[#adb5bd]">
             Try composing a post below to see how it automatically formats for different social networks.
           </p>
@@ -155,7 +155,7 @@ function Landing() {
 
         <div className="grid items-start gap-[30px] max-[900px]:grid-cols-1 min-[901px]:grid-cols-[1.1fr_1fr]">
           <div className="glass-card p-6">
-            <h4 className="mb-5 border-b border-white/[0.06] pb-2.5 text-[1.1rem] font-[750] text-white">
+            <h4 className="mb-5 border-b border-white/[0.06] pb-2.5 text-[1.1rem] font-[750] text-text-primary">
               Live Composer Demo
             </h4>
             <div className="mb-5 flex flex-col gap-2">
@@ -173,11 +173,11 @@ function Landing() {
                       style={{ '--border-glow': data.color }}
                     >
                       <img src={data.avatar} alt={data.name} className="h-full w-full rounded-full object-cover" />
-                      <span className="absolute -bottom-1 -right-1 flex h-[18px] w-[18px] items-center justify-center rounded-full border border-white/10 bg-[#0b0c10] text-[10px]">
+                      <span className="absolute -bottom-1 -right-1 flex h-[18px] w-[18px] items-center justify-center rounded-full border border-border bg-[#0b0c10] text-[10px]">
                         {data.icon}
                       </span>
                       {isSelected && (
-                        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#2b8a3e] text-[9px] font-bold text-white">
+                        <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#2b8a3e] text-[9px] font-bold text-text-primary">
                           ✓
                         </span>
                       )}
@@ -190,7 +190,7 @@ function Landing() {
             <div className="mb-5 flex flex-col gap-2">
               <label className="text-[0.88rem] font-bold text-[#dee2e6]">Type your post caption:</label>
               <textarea
-                className="resize-none rounded-xl border border-white/[0.08] bg-black/30 p-3.5 text-[0.92rem] leading-[1.45] text-white transition-colors focus:border-[#4c6ef5] focus:outline-none"
+                className="resize-none rounded-xl border border-white/[0.08] bg-bg-surface-hover p-3.5 text-[0.92rem] leading-[1.45] text-text-primary transition-colors focus:border-[#4c6ef5] focus:outline-none"
                 rows="4"
                 value={demoText}
                 onChange={(e) => setDemoText(e.target.value)}
@@ -216,7 +216,7 @@ function Landing() {
                 ))}
                 <button
                   type="button"
-                  className="cursor-pointer rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 text-[0.8rem] font-semibold text-[#adb5bd] transition-all hover:bg-white/[0.08] hover:text-white"
+                  className="cursor-pointer rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 text-[0.8rem] font-semibold text-[#adb5bd] transition-all hover:bg-white/[0.08] hover:text-text-primary"
                   onClick={() => setDemoImage('')}
                 >
                   No Media
@@ -234,7 +234,7 @@ function Landing() {
           </div>
 
           <div className="flex h-[480px] flex-col">
-            <h4 className="mb-5 border-b border-white/[0.06] pb-2.5 text-[1.1rem] font-[750] text-white">
+            <h4 className="mb-5 border-b border-white/[0.06] pb-2.5 text-[1.1rem] font-[750] text-text-primary">
               Live Feed Previews ({selectedDemoPlatforms.length} active)
             </h4>
 
@@ -250,9 +250,9 @@ function Landing() {
                   return (
                     <div key={plat} className="glass-card p-4">
                       <div className="mb-3 flex items-center gap-3">
-                        <img src={card.avatar} alt={card.name} className="h-9 w-9 rounded-full border border-white/10 object-cover" />
+                        <img src={card.avatar} alt={card.name} className="h-9 w-9 rounded-full border border-border object-cover" />
                         <div className="flex flex-col">
-                          <span className="text-[0.88rem] font-bold text-white">{card.name}</span>
+                          <span className="text-[0.88rem] font-bold text-text-primary">{card.name}</span>
                           <span className="text-[0.72rem] text-[#868e96]">
                             Just now • {card.icon}
                           </span>
@@ -285,7 +285,7 @@ function Landing() {
       {/* 4. Features Section */}
       <section id="features" className="mx-auto my-[100px] max-w-[1200px] px-5">
         <div className="mb-10 text-center">
-          <h2 className="mb-2.5 text-[2.2rem] font-black tracking-tight text-white">Product Capabilities</h2>
+          <h2 className="mb-2.5 text-[2.2rem] font-black tracking-tight text-text-primary">Product Capabilities</h2>
           <p className="mx-auto max-w-[580px] text-[1.05rem] text-[#adb5bd]">
             Everything you need to automate, publish, and track your content in one unified space.
           </p>
@@ -294,7 +294,7 @@ function Landing() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-6">
           <div className="glass-card px-6 py-[30px] transition-all duration-250 hover:-translate-y-[5px] hover:border-[rgba(76,110,245,0.25)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)]">
             <span className="mb-4 block text-[2.2rem]">📅</span>
-            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-white">Smart Queue Scheduling</h3>
+            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-text-primary">Smart Queue Scheduling</h3>
             <p className="m-0 text-[0.88rem] leading-[1.45] text-[#adb5bd]">
               Define custom posting time slots for each network. Automate queues to publish at optimal hours of maximum audience engagement.
             </p>
@@ -302,7 +302,7 @@ function Landing() {
 
           <div className="glass-card px-6 py-[30px] transition-all duration-250 hover:-translate-y-[5px] hover:border-[rgba(76,110,245,0.25)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)]">
             <span className="mb-4 block text-[2.2rem]">⚡</span>
-            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-white">Instant Cross-Publishing</h3>
+            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-text-primary">Instant Cross-Publishing</h3>
             <p className="m-0 text-[0.88rem] leading-[1.45] text-[#adb5bd]">
               One editor, infinite channels. Simultaneously distribute post captions, attachments, hashtags, and stories to all target networks.
             </p>
@@ -310,7 +310,7 @@ function Landing() {
 
           <div className="glass-card px-6 py-[30px] transition-all duration-250 hover:-translate-y-[5px] hover:border-[rgba(76,110,245,0.25)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)]">
             <span className="mb-4 block text-[2.2rem]">💬</span>
-            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-white">Unified Comment Inbox</h3>
+            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-text-primary">Unified Comment Inbox</h3>
             <p className="m-0 text-[0.88rem] leading-[1.45] text-[#adb5bd]">
               Monitor customer feedback and responses. Reply to Facebook comments, Instagram mentions, and LinkedIn queries from a single timeline.
             </p>
@@ -318,7 +318,7 @@ function Landing() {
 
           <div className="glass-card px-6 py-[30px] transition-all duration-250 hover:-translate-y-[5px] hover:border-[rgba(76,110,245,0.25)] hover:shadow-[0_12px_30px_rgba(0,0,0,0.3)]">
             <span className="mb-4 block text-[2.2rem]">📊</span>
-            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-white">Audience Growth Analytics</h3>
+            <h3 className="mb-2.5 text-[1.15rem] font-extrabold text-text-primary">Audience Growth Analytics</h3>
             <p className="m-0 text-[0.88rem] leading-[1.45] text-[#adb5bd]">
               Track post impressions, reach percentages, and click-through counts. Generate automated performance reports to guide your strategy.
             </p>
@@ -329,7 +329,7 @@ function Landing() {
       {/* 5. Pricing CTA Section */}
       <section id="pricing" className="glass-card mx-auto my-[100px] max-w-[800px] px-6 py-12 text-center max-[600px]:p-6">
         <div>
-          <h2 className="mb-2.5 text-[2rem] font-black text-white">Get Started Today</h2>
+          <h2 className="mb-2.5 text-[2rem] font-black text-text-primary">Get Started Today</h2>
           <p className="mx-auto mb-[30px] max-w-[520px] text-base leading-[1.45] text-[#adb5bd]">
             Automate your social presence. Access advanced scheduler tools, unlimited posts, and basic analytics free of charge.
           </p>
@@ -354,8 +354,8 @@ function Landing() {
             <span className="bg-gradient-to-br from-[#ffd43b] to-[#fab005] bg-clip-text text-2xl text-transparent drop-shadow-[0_0_8px_rgba(250,176,5,0.5)]">
               ⚡
             </span>
-            <span className="text-[1.35rem] font-[850] tracking-tight text-white">SocialHub</span>
-            <p className="m-0 border-l border-white/10 pl-2 text-[0.8rem] text-[#868e96]">
+            <span className="text-[1.35rem] font-[850] tracking-tight text-text-primary">SocialHub</span>
+            <p className="m-0 border-l border-border pl-2 text-[0.8rem] text-[#868e96]">
               Automated Social Media Management Dashboard.
             </p>
           </div>
@@ -368,10 +368,10 @@ function Landing() {
       {/* 7. Auth Modal Overlay */}
       {isAuthOpen && (
         <div className="animate-fade-in fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 backdrop-blur-[5px]">
-          <div className="glass-card animate-scale-up relative w-[420px] max-w-[90%] border border-white/10 p-[30px]">
+          <div className="glass-card animate-scale-up relative w-[420px] max-w-[90%] border border-border p-[30px]">
             <button
               type="button"
-              className="absolute top-4 right-4 cursor-pointer border-none bg-transparent text-base text-[#868e96] hover:text-white"
+              className="absolute top-4 right-4 cursor-pointer border-none bg-transparent text-base text-[#868e96] hover:text-text-primary"
               onClick={() => setIsAuthOpen(false)}
             >
               ✕
@@ -403,7 +403,7 @@ function Landing() {
                     placeholder="Alex Rivera"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-[0.9rem] text-white transition-colors focus:border-[#4c6ef5] focus:outline-none"
+                    className="rounded-lg border border-border bg-bg-surface-hover px-3.5 py-2.5 text-[0.9rem] text-text-primary transition-colors focus:border-[#4c6ef5] focus:outline-none"
                     required
                   />
                 </div>
@@ -416,7 +416,7 @@ function Landing() {
                   placeholder="alexdev@socialhub.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-[0.9rem] text-white transition-colors focus:border-[#4c6ef5] focus:outline-none"
+                  className="rounded-lg border border-border bg-bg-surface-hover px-3.5 py-2.5 text-[0.9rem] text-text-primary transition-colors focus:border-[#4c6ef5] focus:outline-none"
                   required
                 />
               </div>
@@ -428,7 +428,7 @@ function Landing() {
                   placeholder="alexdev"
                   value={formData.username}
                   onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-[0.9rem] text-white transition-colors focus:border-[#4c6ef5] focus:outline-none"
+                  className="rounded-lg border border-border bg-bg-surface-hover px-3.5 py-2.5 text-[0.9rem] text-text-primary transition-colors focus:border-[#4c6ef5] focus:outline-none"
                   required
                 />
               </div>
@@ -440,7 +440,7 @@ function Landing() {
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-[0.9rem] text-white transition-colors focus:border-[#4c6ef5] focus:outline-none"
+                  className="rounded-lg border border-border bg-bg-surface-hover px-3.5 py-2.5 text-[0.9rem] text-text-primary transition-colors focus:border-[#4c6ef5] focus:outline-none"
                   required
                 />
               </div>
