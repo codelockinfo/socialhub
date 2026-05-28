@@ -3,6 +3,8 @@ import { schedulerService, userService } from '../services/api';
 import { useStudio } from '../context/StudioContext';
 import { PLATFORM_THEMES, ALL_PLATFORMS } from '../constants/platforms';
 import ComposerModal from '../components/ComposerModal';
+import { motion } from 'framer-motion';
+import { Settings, List, Calendar, Plus, Tag, ChevronDown, Globe, Layers } from 'lucide-react';
 
 const PRESET_IMAGES = [
   { name: 'Modern Workspace', url: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80' },
@@ -437,169 +439,130 @@ function Publisher() {
         </section>
       )}
 
-      <main className="flex flex-col gap-5">
+      <main className="flex flex-col gap-0 border border-white/10 rounded-2xl bg-[#0f172a]/50 overflow-hidden backdrop-blur-xl">
         {channels.length > 0 ? (
           <>
-            <header className="glass-panel flex flex-wrap items-center justify-between gap-4 rounded-2xl p-6">
-              <div className="flex min-w-0 flex-wrap items-center gap-4">
+            <header className="flex flex-wrap items-center justify-between gap-4 p-6 bg-[#0f172a] border-b border-white/10">
+              <div className="flex min-w-0 items-center gap-4">
                 {selectedChannel ? (
-                  <div className="relative h-[52px] w-[52px] shrink-0">
+                  <div className="relative h-12 w-12 shrink-0">
                     <img
                       src={selectedChannel.avatar}
                       alt={selectedChannel.accountName}
-                      className="h-full w-full rounded-full border-2 border-border object-cover"
+                      className="h-full w-full rounded-full border border-white/10 object-cover"
                     />
                     <span
-                      className="absolute -bottom-0.5 -right-0.5 flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 border-[#1a1b1e] text-xs text-text-primary"
+                      className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#0f172a] text-[10px] text-white"
                       style={{ backgroundColor: PLATFORM_THEMES[selectedChannel.platform]?.color }}
                     >
                       {PLATFORM_THEMES[selectedChannel.platform]?.icon}
                     </span>
                   </div>
                 ) : (
-                  <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full border-2 border-border bg-violet-600/20 text-2xl">
-                    ⊞
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-indigo-500/20 text-indigo-400">
+                    <Layers className="h-5 w-5" />
                   </div>
                 )}
-                <div className="flex min-w-0 flex-col">
-                  <h2 className="m-0 text-[1.4rem] font-extrabold tracking-tight text-text-primary">{viewTitle}</h2>
-                  <div className="mt-0.5 flex items-center gap-1.5 text-[0.78rem] text-[#868e96]">
-                    <span className="h-2 w-2 rounded-full bg-[#40c057]" />
-                    {selectedChannel
-                      ? `Active connection • ${selectedChannel.followersCount.toLocaleString()} subscribers`
-                      : `${channels.length} connected channel${channels.length === 1 ? '' : 's'}`}
+                
+                <div className="flex min-w-0 flex-col justify-center">
+                  <div className="flex items-center gap-2">
+                    <h2 className="m-0 text-lg font-bold tracking-tight text-white">{viewTitle}</h2>
+                    {selectedChannel && <Settings className="h-4 w-4 text-slate-500 cursor-pointer hover:text-slate-300" />}
                   </div>
-                </div>
-
-                {selectedChannel && (
-                <div className="ml-0 sm:ml-2">
-                  {isEditingGoal ? (
-                    <div className="flex items-center gap-1.5">
-                      <input
-                        type="text"
-                        value={goalInput}
-                        onChange={(e) => setGoalInput(e.target.value)}
-                        className="w-[140px] rounded-md border border-[#fd7e14]/40 bg-bg-surface-hover px-2 py-0.5 text-[0.78rem] text-text-primary focus:outline-none focus:border-[#fd7e14]"
-                      />
-                      <button
-                        type="button"
-                        className="cursor-pointer rounded-md border-none bg-[#2b8a3e] px-1.5 py-0.5 text-[10px] text-text-primary"
-                        onClick={handleGoalSave}
-                      >
-                        ✓
-                      </button>
-                    </div>
-                  ) : (
-                    <div
-                      className="flex cursor-pointer items-center gap-1.5 rounded-full border border-[#fd7e14]/20 bg-[#fd7e14]/10 px-2.5 py-1 text-[0.78rem] font-bold text-[#ff922b] transition hover:bg-[#fd7e14]/[0.18]"
-                      onClick={() => setIsEditingGoal(true)}
-                    >
-                      🎯 Goal: {postingGoal} <span>✏️</span>
+                  
+                  {selectedChannel && (
+                    <div className="mt-0.5">
+                      {isEditingGoal ? (
+                        <div className="flex items-center gap-1.5">
+                          <input
+                            type="text"
+                            value={goalInput}
+                            onChange={(e) => setGoalInput(e.target.value)}
+                            className="w-[140px] rounded border border-indigo-500/40 bg-slate-800 px-2 py-0.5 text-[11px] text-white focus:outline-none focus:border-indigo-500"
+                          />
+                          <button
+                            type="button"
+                            className="cursor-pointer rounded border-none bg-indigo-500 px-1.5 py-0.5 text-[10px] text-white"
+                            onClick={handleGoalSave}
+                          >
+                            ✓
+                          </button>
+                        </div>
+                      ) : (
+                        <div
+                          className="flex cursor-pointer items-center gap-1 text-[11px] font-semibold text-pink-400 hover:text-pink-300 transition-colors"
+                          onClick={() => setIsEditingGoal(true)}
+                        >
+                          <Plus className="h-3 w-3" /> Set a posting goal
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-                )}
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="flex rounded-lg border border-white/5 bg-black/25 p-0.5">
-                  <button type="button" className="cursor-pointer rounded-md border-none bg-white/[0.06] px-3 py-1.5 text-[0.8rem] font-semibold text-text-primary">
-                    📑 List View
+                <div className="flex rounded border border-white/10 bg-slate-900/50 p-0.5">
+                  <button type="button" className="flex items-center gap-1.5 cursor-pointer rounded border-none bg-white/10 px-3 py-1.5 text-xs font-semibold text-white shadow-sm">
+                    <List className="h-3.5 w-3.5" /> List
                   </button>
                   <button
                     type="button"
-                    className="cursor-pointer rounded-md border-none bg-transparent px-3 py-1.5 text-[0.8rem] font-semibold text-[#868e96] transition hover:text-[#dee2e6]"
+                    className="flex items-center gap-1.5 cursor-pointer rounded border-none bg-transparent px-3 py-1.5 text-xs font-semibold text-slate-400 transition hover:text-slate-200"
                   >
-                    📅 Calendar
+                    <Calendar className="h-3.5 w-3.5" /> Calendar
                   </button>
                 </div>
                 <button
                   type="button"
-                  className="btn-gradient-buffer cursor-pointer rounded-lg border-none px-[18px] py-2.5 text-sm font-semibold hover:-translate-y-px"
+                  className="flex items-center gap-1.5 cursor-pointer rounded-full bg-emerald-500 hover:bg-emerald-400 text-white border-none px-4 py-1.5 text-xs font-bold shadow-lg shadow-emerald-500/20 transition-all"
                   onClick={() => handleOpenComposer()}
                 >
-                  + New Post
+                  <Plus className="h-3.5 w-3.5" /> New Post
                 </button>
               </div>
             </header>
 
-            <div className="flex flex-wrap gap-1 rounded-xl border border-border bg-bg-surface/40 px-3 py-2">
-              {[
-                { id: 'publish', label: 'Queue', icon: '📤' },
-                ...(selectedChannel
-                  ? [
-                      { id: 'community', label: 'Inbox', icon: '💬' },
-                      { id: 'analytics', label: 'Analytics', icon: '📊' },
-                    ]
-                  : []),
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveSubTab(tab.id)}
-                  className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold transition-all ${
-                    activeSubTab === tab.id
-                      ? 'bg-violet-600/25 text-violet-200'
-                      : 'text-text-muted hover:bg-bg-surface-hover hover:text-text-primary'
-                  }`}
-                >
-                  <span>{tab.icon}</span> {tab.label}
+            <div className="flex items-center justify-between px-6 py-0 border-b border-white/5 bg-slate-900/30">
+              <div className="flex gap-6">
+                {[
+                  { id: 'queue', label: 'Queue' },
+                  { id: 'drafts', label: 'Drafts' },
+                  { id: 'approvals', label: 'Approvals' },
+                  { id: 'sent', label: 'Sent' }
+                ].map(tab => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    className={`relative cursor-pointer bg-transparent py-3 text-xs font-semibold transition-colors ${
+                      activeQueueSubTab === tab.id
+                        ? 'text-white'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                    onClick={() => {
+                      setActiveQueueSubTab(tab.id);
+                      setActiveSubTab('publish');
+                    }}
+                  >
+                    {tab.label} <span className="ml-1 rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-bold text-slate-300">0</span>
+                    {activeQueueSubTab === tab.id && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 rounded-t-full" />
+                    )}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4 text-xs font-medium text-slate-400">
+                <button className="flex items-center gap-1 hover:text-slate-200 transition-colors">
+                  <Tag className="h-3.5 w-3.5" /> Tags <ChevronDown className="h-3 w-3" />
                 </button>
-              ))}
-            </div>
-
-            {activeSubTab === 'publish' && (
-              <div className="glass-panel flex items-center justify-between rounded-2xl px-6 py-3">
-                <div className="flex gap-1">
-                  <button
-                    type="button"
-                    className={`cursor-pointer border-b-2 bg-transparent px-4 py-2 text-[0.92rem] font-bold transition ${
-                      activeQueueSubTab === 'queue'
-                        ? 'border-[#4c6ef5] text-[#4c6ef5]'
-                        : 'border-transparent text-[#868e96] hover:text-[#dee2e6]'
-                    }`}
-                    onClick={() => setActiveQueueSubTab('queue')}
-                  >
-                    Queue
-                  </button>
-                  <button
-                    type="button"
-                    className={`cursor-pointer border-b-2 bg-transparent px-4 py-2 text-[0.92rem] font-bold transition ${
-                      activeQueueSubTab === 'drafts'
-                        ? 'border-[#4c6ef5] text-[#4c6ef5]'
-                        : 'border-transparent text-[#868e96] hover:text-[#dee2e6]'
-                    }`}
-                    onClick={() => setActiveQueueSubTab('drafts')}
-                  >
-                    Drafts
-                  </button>
-                  <button
-                    type="button"
-                    className={`cursor-pointer border-b-2 bg-transparent px-4 py-2 text-[0.92rem] font-bold transition ${
-                      activeQueueSubTab === 'sent'
-                        ? 'border-[#4c6ef5] text-[#4c6ef5]'
-                        : 'border-transparent text-[#868e96] hover:text-[#dee2e6]'
-                    }`}
-                    onClick={() => setActiveQueueSubTab('sent')}
-                  >
-                    Sent (
-                    {posts.filter(p => {
-                      if (p.status !== 'sent') return false;
-                      if (!selectedChannel) {
-                        const platforms = channels.map(c => c.platform);
-                        return p.platforms.some(pl => platforms.includes(pl));
-                      }
-                      return p.platforms.includes(selectedChannel.platform);
-                    }).length}
-                    )
-                  </button>
-                </div>
-
-                <div className="text-[0.8rem] text-[#868e96]">
-                  <span>🌎</span> Timezone: <strong className="text-[#dee2e6]">Asia/Kolkata (IST)</strong>
+                <div className="flex items-center gap-1.5 border-l border-white/10 pl-4">
+                  <Globe className="h-3.5 w-3.5" /> Kolkata
                 </div>
               </div>
-            )}
+            </div>
+
+            <div className="p-6">
 
             {/* Workspace View Renderer */}
             <div className="flex flex-col">
@@ -1048,38 +1011,83 @@ function Publisher() {
               )}
 
             </div>
+            </div>
           </>
         ) : (
-          <div className="surface-card relative overflow-hidden p-10 text-center md:p-14">
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-violet-600/20 via-fuchsia-600/10 to-cyan-500/15" />
-            <div className="relative mx-auto max-w-lg">
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 text-4xl shadow-xl shadow-violet-600/30">
-                ⚡
-              </div>
-              <h2 className="font-heading mb-3 text-2xl font-bold text-text-primary md:text-3xl">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900/60 p-10 text-center md:p-16 shadow-2xl backdrop-blur-xl"
+          >
+            <div className="pointer-events-none absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+            <div className="pointer-events-none absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.15)_0%,transparent_50%)]" />
+            
+            <div className="relative z-10 mx-auto max-w-xl">
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, type: "spring" }}
+                className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-gradient-to-br from-indigo-500 to-fuchsia-500 shadow-[0_0_40px_rgba(99,102,241,0.5)] border border-white/20"
+              >
+                <svg className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </motion.div>
+              
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="mb-4 text-3xl font-extrabold text-white md:text-4xl"
+              >
                 Connect your first channel
-              </h2>
-              <p className="mb-8 text-text-secondary">
-                Link Facebook, Instagram, LinkedIn, or YouTube to schedule posts, track analytics, and reply to comments — all in one place.
-              </p>
-              <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                {ALL_PLATFORMS.slice(0, 8).map(p => (
-                  <button
+              </motion.h2>
+              
+              <motion.p 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="mb-10 text-lg text-slate-400"
+              >
+                Link Facebook, Instagram, LinkedIn, or YouTube to schedule posts, track analytics, and reply to comments — all in one premium dashboard.
+              </motion.p>
+              
+              <motion.div 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
+              >
+                {ALL_PLATFORMS.slice(0, 8).map((p, idx) => (
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    whileTap={{ scale: 0.95 }}
                     key={p.id}
                     type="button"
                     onClick={() => openConnectModal(p.id, false)}
-                    className="flex flex-col items-center gap-2 rounded-xl border border-border bg-bg-surface/80 px-3 py-4 transition-all hover:-translate-y-0.5 hover:border-violet-500/40 hover:bg-bg-surface-hover"
+                    className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-indigo-500/50 hover:bg-white/10"
                   >
-                    <span className="text-2xl">{p.icon}</span>
-                    <span className="text-xs font-semibold text-text-secondary">{p.name}</span>
-                  </button>
+                    <span className="text-3xl">{p.icon}</span>
+                    <span className="text-xs font-bold text-slate-300">{p.name}</span>
+                  </motion.button>
                 ))}
-              </div>
-              <button type="button" className="btn-primary" onClick={() => openConnectModal('instagram', true)}>
-                + More channels
-              </button>
+              </motion.div>
+              
+              <motion.button 
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="button" 
+                className="rounded-full bg-white px-8 py-3.5 text-sm font-bold text-slate-900 shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]" 
+                onClick={() => openConnectModal('instagram', true)}
+              >
+                + Browse all integrations
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         )}
       </main>
 
