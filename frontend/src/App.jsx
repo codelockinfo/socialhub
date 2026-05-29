@@ -10,6 +10,8 @@ import Landing from './pages/Landing';
 import Onboarding from './pages/Onboarding';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import YoutubeIntegrations from './pages/YoutubeIntegrations';
+import YoutubeUpload from './pages/YoutubeUpload';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/publisher" element={<Publisher />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/youtube/integrations" element={<YoutubeIntegrations />} />
+            <Route path="/youtube/upload" element={<YoutubeUpload />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

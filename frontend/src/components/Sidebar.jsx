@@ -7,6 +7,7 @@ import {
   PLATFORM_THEMES,
 } from "../constants/platforms";
 import { Plus, PenTool, LayoutGrid, MessageCircle, BarChart3, ChevronDown, ChevronRight, Layers } from "lucide-react";
+import { FaYoutube } from "react-icons/fa";
 
 function Sidebar() {
   const [user, setUser] = useState(null);
@@ -132,6 +133,9 @@ function Sidebar() {
               </button>
             )
           })}
+          <NavLink to="/youtube/integrations" className="flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
+            <FaYoutube className="text-lg text-red-500" /> YouTube
+          </NavLink>
           <button onClick={() => openConnectModal('instagram', true)} className="flex items-center gap-3 rounded-lg px-3 py-1.5 text-sm text-slate-400 hover:bg-white/5 hover:text-slate-200 transition-colors">
             <Plus className="h-4 w-4" /> More channels
           </button>

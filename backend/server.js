@@ -6,6 +6,7 @@ import usersRouter from './routes/users.js';
 import schedulerRouter from './routes/scheduler.js';
 import authRoutes from './routes/authRoutes.js';
 import publishRoutes from './routes/publishRoutes.js';
+import youtubeRoutes from './routes/youtubeRoutes.js';
 import pool from './config/db.js';
 import { setupDb } from './config/setupDb.js';
 import connectDB from './config/mongoDb.js'; // MongoDB connection
@@ -33,6 +34,7 @@ app.use('/api/scheduler', schedulerRouter);
 // New MongoDB / OAuth Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/publish', publishRoutes);
+app.use('/api/youtube', youtubeRoutes);
 
 // Root Health Check Endpoint
 app.get('/', (req, res) => {
